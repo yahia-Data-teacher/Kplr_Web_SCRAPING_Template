@@ -4,44 +4,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 import json
-from bs4 import BeautifulSoup as soup
 import pandas as pd
-
-chrome_options = Options()
-chrome_options.add_argument('--no-sandbox')
-chrome_options.add_argument('--disable-dev-shm-usage')
-chrome_options.add_argument("--disable-extensions")
-
-driver = webdriver.Chrome(options=chrome_options)
+# lecture des données à partir du fichier csv
+df_vin = pd.read_csv('vin_11.csv')
+vin = []
 
 
-# ouvrir le URL
-driver.get("https:/google.com")
+def web_scrap():
+  chrome_options = Options()
+  chrome_options.add_argument('--no-sandbox')
+  chrome_options.add_argument('--disable-dev-shm-usage')
+  chrome_options.add_argument("--disable-extensions")
 
-##  Finding Elements
+  for i in df_vin['vin_11'][10:30]:
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get("https://www.autodna.com/")
 
-google_text = driver.find_element(By.CLASS_NAME, "MV3Tnb").text
 
-print(google_text)
-
-input_box = driver.find_element(By.NAME, "q")
-
-## Typing and Clicking
-
-input_box.send_keys("Hi")
-
-input_box.send_keys(Keys.ENTER)
-
-home_link = driver.find_element(By.ID, "logo")
-
-home_link.click()
-
-## Selectors
-
-tag_search = driver.find_element(By.TAG_NAME, "a").text
-
-print(tag_search)
-
-link_text = driver.find_element(By.LINK_TEXT, "About").text
-
-print(link_text)
+#Complete Code
+if __name__ == "__main__":
+  web_scrap()
