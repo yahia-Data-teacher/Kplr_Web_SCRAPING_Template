@@ -14,7 +14,6 @@ chrome_options.add_argument("--disable-extensions")
 
 driver = webdriver.Chrome(options=chrome_options)
 
-# Telechager les fichier csv "vin_11"
 
 # ouvrir le URL
 driver.get("https:/google.com")
